@@ -1,0 +1,22 @@
+{
+    "name": "nik-tar/customer-hobby",
+    "description": "A Magento Module which adds custom customer attribute \"Hobby\"",
+    "version": "0.0.1",
+    "type": "magento2-module",
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=8.1",
+        "magento/framework": "*",
+        "magento/module-backend": "102.0.*",
+        "magento/module-graph-ql": "100.4.*",
+        "magento/module-customer-graph-ql": "100.4.*"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Niktar\\CustomerHobby\\": ""
+        }
+    }
+}

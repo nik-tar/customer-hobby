@@ -1,0 +1,7 @@
+type Customer {
+    hobby: String @doc(description: "Customer Hobby") @resolver(class: "\\Niktar\\CustomerHobby\\Model\\Resolver\\GetHobby")
+}
+
+input CustomerInput {
+    hobby: String @doc(description: "Customer Hobby Attribute Value")
+}

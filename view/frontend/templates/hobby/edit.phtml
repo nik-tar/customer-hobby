@@ -1,0 +1,50 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+use Magento\Customer\Block\Widget\Name;
+
+/** @var \Magento\Framework\View\Element\Template $block */
+/** @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer */
+
+/** @var \Niktar\CustomerHobby\ViewModel\Hobby $viewModel */
+$viewModel = $block->getViewModel();
+?>
+<form class="form form-edit-account"
+      action="<?= $block->escapeUrl($block->getUrl('customer/account/editHobby')) ?>"
+      method="post" id="form-validate"
+      enctype="multipart/form-data"
+      data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>"
+      autocomplete="off">
+    <fieldset class="fieldset info">
+        <?= $block->getBlockHtml('formkey') ?>
+        <legend class="legend"><span><?= $block->escapeHtml(__('Edit Hobby')) ?></span></legend><br>
+
+        <div class="field hobby<?= $viewModel->isRequired() ? ' required' : ''?>">
+            <label class="label" for="hobby"><span><?= $block->escapeHtml($viewModel->getStoreLabel()) ?></span></label>
+            <div class="control">
+                <select id="hobby" name="hobby" title="<?= $block->escapeHtmlAttr($viewModel->getStoreLabel()) ?>"<?php if ($viewModel->isRequired()) : ?> class="validate-select" data-validate="{required:true}"<?php endif; ?>>
+                    <?php $options = $viewModel->getHobbyOptions(); ?>
+                    <?php $value = $viewModel->getHobby(); ?>
+                    <?php foreach ($options as $option) : ?>
+                        <option value="<?= $block->escapeHtmlAttr($option->getValue()) ?>"<?= ($option->getValue() == $value) ? ' selected="selected"' : '' ?>><?= $block->escapeHtml(__($option->getLabel())) ?></option>
+                    <?php endforeach;?>
+                </select>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset class="fieldset additional_info">
+        <?= $block->getChildHtml('form_additional_info') ?>
+    </fieldset>
+
+    <div class="actions-toolbar">
+        <div class="primary">
+            <button type="submit" class="action save primary" title="<?= $block->escapeHtmlAttr(__('Save')) ?>">
+                <span><?= $block->escapeHtml(__('Save')) ?></span>
+            </button>
+        </div>
+    </div>
+</form>
